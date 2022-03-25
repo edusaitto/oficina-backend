@@ -3,9 +3,8 @@ const connectionVeiculo = require("../infra/connection");
 interface IVeiculo {
   veiculo_id?: number;
   cliente_id: number;
+  modelo_id: number;
   placa: string;
-  marca: string;
-  modelo: string;
   ano: string;
 }
 
@@ -48,14 +47,26 @@ class crudVeiculo {
     });
   }
 
+  async getModelos(req, res) {
+    const sql = "SELECT * FROM modelo";
+    await connectionVeiculo.query(sql, (err, results) => {
+      if (err) {
+        return err;
+      }
+      setTimeout(() => {
+        return res.json(results);
+      });
+    });
+  }
+
   async create(req, res) {
     const body: IVeiculo = req.body;
-    const { cliente_id, placa, marca, modelo, ano } = body;
+    const { cliente_id, modelo_id, placa, ano } = body;
     const sql =
-      "INSERT INTO veiculo (cliente_id, placa, marca, modelo, ano) VALUES (?,?,?,?,?)";
+      "INSERT INTO veiculo (cliente_id, modelo_id, placa, ano) VALUES (?,?,?,?)";
     await connectionVeiculo.query(
       sql,
-      [cliente_id, placa, marca, modelo, ano],
+      [cliente_id, modelo_id, placa, ano],
       (err, results) => {
         if (err) {
           return err;
@@ -69,12 +80,12 @@ class crudVeiculo {
 
   async update(req, res) {
     const body: IVeiculo = req.body;
-    const { veiculo_id, cliente_id, placa, marca, modelo, ano } = body;
+    const { veiculo_id, cliente_id, modelo_id, placa, ano } = body;
     const sql =
-      "UPDATE veiculo SET cliente_id=?, placa=?, marca=?, modelo=?, ano=? WHERE veiculo_id=?";
+      "UPDATE veiculo SET cliente_id=?, modelo_id=?, placa=?, ano=? WHERE veiculo_id=?";
     await connectionVeiculo.query(
       sql,
-      [cliente_id, placa, marca, modelo, ano, veiculo_id],
+      [cliente_id, modelo_id, placa, ano, veiculo_id],
       (err, results) => {
         if (err) {
           return err;

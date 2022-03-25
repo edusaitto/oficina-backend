@@ -84,12 +84,17 @@ router.delete(
   jsonParser,
   new crudOficina().delete
 );
-
 router.get(
   "/veiculo",
   cors({ origin: "http://localhost:3000" }),
   jsonParser,
   new crudVeiculo().get
+);
+router.get(
+  "/modelo",
+  cors({ origin: "http://localhost:3000" }),
+  jsonParser,
+  new crudVeiculo().getModelos
 );
 router.get(
   "/veiculo/:veiculo_id",

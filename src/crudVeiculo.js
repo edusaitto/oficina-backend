@@ -106,16 +106,38 @@ var crudVeiculo = /** @class */ (function () {
             });
         });
     };
+    crudVeiculo.prototype.getModelos = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var sql;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        sql = "SELECT * FROM modelo";
+                        return [4 /*yield*/, connectionVeiculo.query(sql, function (err, results) {
+                                if (err) {
+                                    return err;
+                                }
+                                setTimeout(function () {
+                                    return res.json(results);
+                                });
+                            })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     crudVeiculo.prototype.create = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var body, cliente_id, placa, marca, modelo, ano, sql;
+            var body, cliente_id, modelo_id, placa, ano, sql;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         body = req.body;
-                        cliente_id = body.cliente_id, placa = body.placa, marca = body.marca, modelo = body.modelo, ano = body.ano;
-                        sql = "INSERT INTO veiculo (cliente_id, placa, marca, modelo, ano) VALUES (?,?,?,?,?)";
-                        return [4 /*yield*/, connectionVeiculo.query(sql, [cliente_id, placa, marca, modelo, ano], function (err, results) {
+                        cliente_id = body.cliente_id, modelo_id = body.modelo_id, placa = body.placa, ano = body.ano;
+                        sql = "INSERT INTO veiculo (cliente_id, modelo_id, placa, ano) VALUES (?,?,?,?)";
+                        return [4 /*yield*/, connectionVeiculo.query(sql, [cliente_id, modelo_id, placa, ano], function (err, results) {
                                 if (err) {
                                     return err;
                                 }
@@ -132,14 +154,14 @@ var crudVeiculo = /** @class */ (function () {
     };
     crudVeiculo.prototype.update = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var body, veiculo_id, cliente_id, placa, marca, modelo, ano, sql;
+            var body, veiculo_id, cliente_id, modelo_id, placa, ano, sql;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         body = req.body;
-                        veiculo_id = body.veiculo_id, cliente_id = body.cliente_id, placa = body.placa, marca = body.marca, modelo = body.modelo, ano = body.ano;
-                        sql = "UPDATE veiculo SET cliente_id=?, placa=?, marca=?, modelo=?, ano=? WHERE veiculo_id=?";
-                        return [4 /*yield*/, connectionVeiculo.query(sql, [cliente_id, placa, marca, modelo, ano, veiculo_id], function (err, results) {
+                        veiculo_id = body.veiculo_id, cliente_id = body.cliente_id, modelo_id = body.modelo_id, placa = body.placa, ano = body.ano;
+                        sql = "UPDATE veiculo SET cliente_id=?, modelo_id=?, placa=?, ano=? WHERE veiculo_id=?";
+                        return [4 /*yield*/, connectionVeiculo.query(sql, [cliente_id, modelo_id, placa, ano, veiculo_id], function (err, results) {
                                 if (err) {
                                     return err;
                                 }
