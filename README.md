@@ -14,7 +14,7 @@ npm install
 npm start
 ```
 
-- Realizar as requisições para o host: http://localhost:3000
+- Realizar as requisições para o host: http://localhost:3001
 
 
 Desenvolvido por Eduardo Saito utilizando Node.JS. 2022.
